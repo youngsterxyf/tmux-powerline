@@ -6,7 +6,7 @@ update_period=600
 TMUX_POWERLINE_SEG_WEATHER_DATA_PROVIDER_DEFAULT="yahoo"
 TMUX_POWERLINE_SEG_WEATHER_UNIT_DEFAULT="c"
 TMUX_POWERLINE_SEG_WEATHER_UPDATE_PERIOD_DEFAULT="600"
-
+TMUX_POWERLINE_SEG_WEATHER_LOCATION_DEFAULT="2151849"
 
 generate_segmentrc() {
 	read -d '' rccontents  << EORC
@@ -21,7 +21,7 @@ export TMUX_POWERLINE_SEG_WEATHER_UPDATE_PERIOD="${TMUX_POWERLINE_SEG_WEATHER_UP
 # 1. Go to Yahoo weather http://weather.yahoo.com/
 # 2. Find the weather for you location
 # 3. Copy the last numbers in that URL. e.g. "http://weather.yahoo.com/united-states/california/newport-beach-12796587/" has the numbers "12796587"
-export TMUX_POWERLINE_SEG_WEATHER_LOCATION=""
+export TMUX_POWERLINE_SEG_WEATHER_LOCATION="${TMUX_POWERLINE_SEG_WEATHER_LOCATION_DEFAULT}"
 EORC
 	echo "$rccontents"
 }
@@ -52,8 +52,9 @@ __process_settings() {
 		export TMUX_POWERLINE_SEG_WEATHER_UPDATE_PERIOD="${TMUX_POWERLINE_SEG_WEATHER_UPDATE_PERIOD_DEFAULT}"
 	fi
 	if [ -z "$TMUX_POWERLINE_SEG_WEATHER_LOCATION" ]; then
-		echo "No weather location specified.";
-		exit 8
+		#echo "No weather location specified.";
+		#exit 8
+        export TMUX_POWERLINE_SEG_WEATHER_LOCATION="${TMUX_POWERLINE_SEG_WEATHER_LOCATION_DEFAULT}"
 	fi
 }
 
