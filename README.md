@@ -3,7 +3,7 @@ This is a set of scripts for making a nice and dynamic tmux statusbar consisting
 
 The following segments exists for now:
 * LAN & WAN IP addresses.
-* Now Playing for MPD, Spotify (GNU/Linux native or wine, OS X), iTunes (OS X), Rhythmbox, Banshee, MOC, Audacious, Rdio (OS X), cmus, Pithos and Last.fm (last scrobbled track).
+* Now Playing for MPD, Spotify (GNU/Linux native or wine, OS X), iTunes (OS X), Rhythmbox, Banshee, MOC, [cplay](https://github.com/youngsterxyf/cplay), Audacious, Rdio (OS X), cmus, Pithos and Last.fm (last scrobbled track).
 * New mail count for GMail, Maildir, mbox and Apple Mail.
 * GNU/Linux and Macintosh OS X battery status (uses [richo/dotfiles/bin/battery](https://github.com/richoH/dotfiles/blob/master/bin/battery)).
 * Weather in Celsius, Fahrenheit and Kelvin using Yahoo Weather.
@@ -56,7 +56,7 @@ Requirements for the lib to work are:
 ## Segment Requirements
 Requirements for some segments. You only need to fulfill the requirements for those segments you want to use.
 
-* `wan_ip.sh`, `now_playing.sh` (last.fm), `weather_yahoo.sh`: curl, bc
+* `wan_ip.sh`, `now_playing.sh` (last.fm), `weather_yahoo.sh`: curl, bc, grep, awk
 * `now_playing.sh` (mpd) : [libmpdclient](http://sourceforge.net/projects/musicpd/files/libmpdclient/)
 * `xkb_layout.sh`: X11, XKB
 * `mailcount.sh` (gmail): wget.

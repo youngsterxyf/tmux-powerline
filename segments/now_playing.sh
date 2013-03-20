@@ -9,11 +9,11 @@ TMUX_POWERLINE_SEG_NOW_PLAYING_MPD_HOST_DEFAULT="localhost"
 TMUX_POWERLINE_SEG_NOW_PLAYING_MPD_PORT_DEFAULT="6600"
 TMUX_POWERLINE_SEG_NOW_PLAYING_LASTFM_UPDATE_PERIOD_DEFAULT="30"
 TMUX_POWERLINE_SEG_NOW_PLAYING_MPD_SIMPLE_FORMAT_DEFAULT="%artist% - %title%"
-TMUX_POWERLINE_SEG_NOW_PLAYING_MUSIC_PLAYER_DEFAULT="audacious"
+TMUX_POWERLINE_SEG_NOW_PLAYING_MUSIC_PLAYER_DEFAULT="cplay"
 
 generate_segmentrc() {
 	read -d '' rccontents  << EORC
-# Music player to use. Can be any of {audacious, banshee, cmus, itunes, lastfm, mocp, mpd, mpd_simple, pithos, rdio, rhythmbox, spotify, spotify_wine}.
+# Music player to use. Can be any of {cplay, audacious, banshee, cmus, itunes, lastfm, mocp, mpd, mpd_simple, pithos, rdio, rhythmbox, spotify, spotify_wine}.
 export TMUX_POWERLINE_SEG_NOW_PLAYING_MUSIC_PLAYER="${TMUX_POWERLINE_SEG_NOW_PLAYING_MUSIC_PLAYER_DEFAULT}"
 # Maximum output length.
 export TMUX_POWERLINE_SEG_NOW_PLAYING_MAX_LEN="${TMUX_POWERLINE_SEG_NOW_PLAYING_MAX_LEN_DEFAULT}"
@@ -46,6 +46,7 @@ run_segment() {
 
 	local np
 	case "$TMUX_POWERLINE_SEG_NOW_PLAYING_MUSIC_PLAYER" in
+        "cplay")  np=$(__np_cplay) ;;
 		"audacious")  np=$(__np_audacious) ;;
 		"banshee")  np=$(__np_banshee) ;;
 		"cmus")  np=$(__np_cmus) ;;
@@ -131,6 +132,13 @@ __np_mpd_simple() {
 	fi
 }
 
+__np_cplay() {
+    cplay_pid=$(ps aux | grep cplay | grep python | awk '{print $2}')
+    if [ -n "$cplay_pid" ]; then
+        np=$(cplay -m)
+        echo "$np"
+    fi
+}
 
 __np_audacious() {
 	audacious_pid=$(pidof audacious)
